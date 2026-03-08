@@ -1,10 +1,11 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
 import React from 'react';
 import { GeneratedImage } from '../types';
-import { X, History, Trash2, Calendar, Clock, ExternalLink } from 'lucide-react';
+import { X, History, Trash2, Calendar, Clock, ExternalLink, Video } from 'lucide-react';
 
 interface HistorySidebarProps {
   isOpen: boolean;
@@ -32,7 +33,7 @@ const HistorySidebar: React.FC<HistorySidebarProps> = ({
       />
 
       {/* Sidebar */}
-      <div className={`fixed top-0 right-0 z-[110] h-full w-full max-w-sm bg-white dark:bg-slate-900 shadow-2xl transition-transform duration-500 ease-out border-l border-slate-200 dark:border-white/10 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed top-0 right-0 z-[110] h-full w-full max-sm bg-white dark:bg-slate-900 shadow-2xl transition-transform duration-500 ease-out border-l border-slate-200 dark:border-white/10 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-slate-950/50">
@@ -67,8 +68,12 @@ const HistorySidebar: React.FC<HistorySidebarProps> = ({
                   onClick={() => onRestore(item)}
                 >
                   <div className="flex gap-4 p-3">
-                    <div className="w-24 h-16 bg-slate-200 dark:bg-slate-700 rounded-lg overflow-hidden flex-shrink-0">
-                      <img src={item.data} alt={item.prompt} className="w-full h-full object-cover" />
+                    <div className="w-24 h-16 bg-slate-200 dark:bg-slate-700 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center">
+                      {item.type === 'image' ? (
+                        <img src={item.data} alt={item.prompt} className="w-full h-full object-cover" />
+                      ) : (
+                        <Video className="w-8 h-8 text-slate-400" />
+                      )}
                     </div>
                     <div className="flex-1 min-w-0 flex flex-col justify-center">
                       <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate pr-6">{item.prompt}</h4>
